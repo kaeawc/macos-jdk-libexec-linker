@@ -99,9 +99,9 @@ jobs:
 
       - name: Check libexec output
         run: |
-          if ! /usr/libexec/java_home -V 2>&1 | grep -q "Homebrew" - "OpenJDK"; then
+          if ! /usr/libexec/java_home -V 2>&1 | grep -q "Homebrew"; then
               echo "Error: Homebrew JDK is not detected by MacOS libexec tooling."
               exit 1
           fi
 
-          echo "SDKMAN JDK detected by macOS libexec tooling."
+          echo "Homebrew JDK detected by macOS libexec tooling."
