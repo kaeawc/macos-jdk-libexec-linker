@@ -14,8 +14,5 @@ echo "About to overwrite $SYSTEM_JDK_PATH and link to current global JDK via Hom
 sudo rm -rf "$SYSTEM_JDK_PATH"
 sudo mkdir -p "$SYSTEM_JDK_PATH"
 sudo ln -s "$HOMEBREW_JDK_CONTENTS_PATH" "$SYSTEM_JDK_PATH/Contents"
-# sudo ln -s "$HOMEBREW_JDK_CONTENTS_PATH/Info.plist" "$SYSTEM_JDK_PATH/Contents/Info.plist"
-# sudo ln -s "$HOMEBREW_JDK_CONTENTS_PATH/MacOS" "$SYSTEM_JDK_PATH/Contents/MacOS"
-# sudo ln -s "$HOMEBREW_JDK_CONTENTS_PATH/Home" "$SYSTEM_JDK_PATH/Contents/Home"
 
 echo "Successfully linked system libexec/java_home with Homebrew installed JDK."
