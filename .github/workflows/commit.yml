@@ -1,0 +1,85 @@
+name: "Commit"
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  asdf-official:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ASDF
+        run: |
+          brew install asdf
+
+      - name: Install JDK via ASDF
+        run: |
+          asdf plugin-add java
+          echo "java_macos_integration_enable=yes" >> ~/.asdfrc
+          asdf install java openjdk-23.0.1
+          asdf global java openjdk-23.0.1
+
+      - name: Check libexec output
+        run: |
+          if ! /usr/libexec/java_home -V 2>&1 | grep -q '"Oracle Corporation" - "OpenJDK 23.0.1"'; then
+              echo "Error: asdf JDK is not detected by macOS libexec tooling."
+              exit 1
+          fi
+
+          echo "asdf JDK detected by macOS libexec tooling."
+
+  asdf-custom-linker:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ASDF
+        run: |
+          brew install asdf
+
+      - name: Install JDK via ASDF
+        run: |
+          asdf plugin-add java
+          asdf install java openjdk-23.0.1
+          asdf global java openjdk-23.0.1
+
+      - name: Link ASDF
+        run: |
+          ./link_asdf_jdk.sh
+
+      - name: Check libexec output
+        run: |
+          if ! /usr/libexec/java_home -V 2>&1 | grep -q "ASDF openjdk"; then
+              echo "Error: asdf JDK is not detected by macOS libexec tooling."
+              exit 1
+          fi
+
+          echo "asdf JDK detected by macOS libexec tooling."
+
+  sdkman-custom-linker:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install SDKMAN & Java
+        run: |
+          brew tap sdkman/tap
+          brew install sdkman-cli
+          export SDKMAN_DIR="$(brew --prefix sdkman-cli)/libexec"
+          source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+          sdk install java 23.0.1-zulu
+          ./link_sdkman_jdk.sh
+
+      - name: Check libexec output
+        run: |
+          if ! /usr/libexec/java_home -V 2>&1 | grep -q "SDKMAN Current JDK"; then
+              echo "Error: SDKMAN JDK is not detected by macOS libexec tooling."
+              exit 1
+          fi
+
+          echo "SDKMAN JDK detected by macOS libexec tooling."
