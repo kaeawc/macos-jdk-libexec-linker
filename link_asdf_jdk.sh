@@ -52,4 +52,4 @@ EOF
 # Move the Info.plist file to the system path
 sudo mv Info.plist "$SYSTEM_JDK_PATH/Contents/Info.plist"
 
-echo "Successfully updated $SYSTEM_JDK_PATH with the selected JDK."
+echo "Successfully linked system libexec/java_home with asdf installed JDK."

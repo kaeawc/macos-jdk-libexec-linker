@@ -41,4 +41,4 @@ EOF
 # Move the Info.plist to the system directory
 sudo mv Info.plist "$SYSTEM_JDK_PATH/Contents/Info.plist"
 
-echo "Successfully updated $SYSTEM_JDK_PATH with SDKMAN JDK."
+echo "Successfully linked system libexec/java_home with SDKMAN installed JDK."
