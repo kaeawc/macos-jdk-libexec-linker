@@ -73,10 +73,25 @@ jobs:
           export SDKMAN_DIR="$(brew --prefix sdkman-cli)/libexec"
           source "${SDKMAN_DIR}/bin/sdkman-init.sh"
           sdk install java 23.0.1-zulu
-          ./link_sdkman_jdk.sh
+          echo "yes" | ./link_sdkman_jdk.sh
 
       - name: Check libexec output
         run: |
+          echo ""
+          echo "ls (brew --prefix sdkman-cli)/libexec/candidates/java/current"
+          ls "$(brew --prefix sdkman-cli)/libexec/candidates/java/current"
+          echo ""
+          echo "ls /Library/Java/JavaVirtualMachines/sdkman-jdk-current"
+          ls /Library/Java/JavaVirtualMachines/sdkman-jdk-current
+          echo ""
+          echo "ls /Library/Java/JavaVirtualMachines/sdkman-jdk-current/Contents/"
+          ls /Library/Java/JavaVirtualMachines/sdkman-jdk-current/Contents/
+
+          echo ""
+          /usr/libexec/java_home -V
+
+          
+          echo ""
           if ! /usr/libexec/java_home -V 2>&1 | grep -q "SDKMAN Current JDK"; then
               echo "Error: SDKMAN JDK is not detected by MacOS libexec tooling."
               exit 1
