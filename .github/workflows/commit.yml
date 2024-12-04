@@ -90,7 +90,7 @@ jobs:
 
 
           echo ""
-          if ! /usr/libexec/java_home -V 2>&1 | grep -q "SDKMAN Current JDK"; then
+          if ! /usr/libexec/java_home -V 2>&1 | grep -q "SDKMAN JDK Latest Version"; then
               echo "Error: SDKMAN JDK is not detected by MacOS libexec tooling."
               exit 1
           fi

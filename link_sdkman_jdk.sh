@@ -45,13 +45,13 @@ cat <<EOF | envsubst > Info.plist
         <key>CFBundleExecutable</key>
         <string>libjli.dylib</string>
         <key>CFBundleGetInfoString</key>
-        <string>SDKMAN JDK Latest Version</string>
+        <string>SDKMAN Current JDK</string>
         <key>CFBundleIdentifier</key>
         <string>sdkman.jdk</string>
         <key>CFBundleInfoDictionaryVersion</key>
         <string>7.0</string>
         <key>CFBundleName</key>
-        <string>SDKMAN JDK Latest Version</string>
+        <string>SDKMAN Current JDK</string>
         <key>CFBundlePackageType</key>
         <string>BNDL</string>
         <key>CFBundleShortVersionString</key>
