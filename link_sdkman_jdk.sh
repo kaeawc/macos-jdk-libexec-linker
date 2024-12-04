@@ -18,6 +18,16 @@ if [ ! -d "$SDKMAN_JAVA_HOME_PATH" ]; then
 fi
 
 echo "About to overwrite $SYSTEM_JDK_PATH and link to current global JDK via SDKMAN"
+echo ""
+echo "⚠️ WARNING ⚠️"
+echo "This way of linking against the current JDK is fragile. If you change the current JDK in SDKMAN you should rerun this script to link the system against the new current JDK version."
+echo "Please type 'yes' if you understand:"
+
+read -r user_input
+if [[ "$user_input" != "yes" ]]; then
+    exit 0
+fi
+
 sudo rm -rf "$SYSTEM_JDK_PATH/Contents"
 sudo mkdir -p "$SYSTEM_JDK_PATH/Contents"
 sudo ln -s "$SDKMAN_JAVA_PATH" "$SYSTEM_JDK_PATH/Contents/Home"
