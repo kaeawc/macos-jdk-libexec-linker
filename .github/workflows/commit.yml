@@ -77,20 +77,7 @@ jobs:
 
       - name: Check libexec output
         run: |
-          echo ""
-          echo "ls (brew --prefix sdkman-cli)/libexec/candidates/java/current"
-          ls "$(brew --prefix sdkman-cli)/libexec/candidates/java/current"
-          echo ""
-          echo "ls /Library/Java/JavaVirtualMachines"
-          ls /Library/Java/JavaVirtualMachines
-          
-
-          echo ""
-          /usr/libexec/java_home -V
-
-
-          echo ""
-          if ! /usr/libexec/java_home -V 2>&1 | grep -q "SDKMAN JDK Latest Version"; then
+          if ! /usr/libexec/java_home -V 2>&1 | grep -q "SDKMAN Current JDK"; then
               echo "Error: SDKMAN JDK is not detected by MacOS libexec tooling."
               exit 1
           fi
